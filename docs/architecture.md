@@ -233,10 +233,10 @@ Each document should store:
 
 ```json
 {
-  "document_name": "",
   "drug_name": "",
+  "document_name": "",
   "document_type": "",
-  "organization": "",
+  "source_organization": "",
   "publication_date": ""
 }
 ```
@@ -268,9 +268,8 @@ Retrieved chunks should preserve:
 
 ```json
 {
-  "text": "",
-  "page_number": "",
   "section": "",
+  "text": "",
   "document_name": ""
 }
 ```
