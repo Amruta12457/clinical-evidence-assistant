@@ -269,8 +269,9 @@ Retrieved chunks should preserve:
 ```json
 {
   "section": "",
-  "text": "",
-  "document_name": ""
+  "document_name": "",
+  "drug_name": "",
+  "text": ""
 }
 ```
 
