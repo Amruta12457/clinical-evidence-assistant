@@ -37,8 +37,6 @@ def parse_response(response):
 
     for citation in citations:
         for chunk in citation["retrievedReferences"]:
-            #print(chunk)
-
             text = chunk["content"]["text"]
             name = chunk["location"]["s3Location"]["uri"].split("/")[-1]
             page_number = chunk.get("metadata", {}).get("x-amz-bedrock-kb-document-page-number")
