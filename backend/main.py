@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException, status
 from pydantic import BaseModel
 import logging
 from bedrock import ask_question
+from fastapi.middleware.cors import CORSMiddleware
 
 logger = logging.getLogger(__name__)
 
@@ -22,6 +23,14 @@ class ParsedResponse(BaseModel):
 
 app = FastAPI()
 
+# Adding CORS middleware for API to respond to browser
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Endpoint to get response from Bedrock
 @app.post("/ask", response_model=ParsedResponse)
