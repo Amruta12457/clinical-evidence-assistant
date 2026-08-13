@@ -1,14 +1,18 @@
 import boto3
+import os
+from dotenv import load_dotenv
 
-REGION = "us-east-2"
-KNOWLEDGE_BASE_ID = "0FPEUMQSVT"
+load_dotenv()
+
+REGION = os.getenv("REGION")
+KNOWLEDGE_BASE_ID = os.getenv("KNOWLEDGE_BASE_ID")
 
 client = boto3.client(
     "bedrock-agent-runtime",
     region_name=REGION
 )
 
-MODEL_ID = "amazon.nova-lite-v1:0"
+MODEL_ID = os.getenv("MODEL_ID")
 
 
 def ask_question(question):
