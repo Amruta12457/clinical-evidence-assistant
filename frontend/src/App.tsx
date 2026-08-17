@@ -1,6 +1,6 @@
 import './App.css'
 import { useState } from 'react'
-import type { Source } from "./types"
+import type { Source, ApiResponse } from "./types"
 import Sources from "./components/Sources"
 import QuestionInput from './components/QuestionInput'
 import Answer from './components/Answer'
@@ -41,7 +41,7 @@ function App() {
         throw new Error("Request failed.")
       }
 
-      const data = await response.json()
+      const data: ApiResponse = await response.json()
 
       setAnswer(data.answer)
       setSources(data.sources)
@@ -55,21 +55,26 @@ function App() {
 
   return (
     <>
-      <h1>Clinical Evidence Assistant</h1>
-      <p>A chatbot for answering your questions about clinical evidence from public medical documents.</p>
+      <header className="app-header">
+        <h1>Clinical Evidence Assistant</h1>
+        <p>A chatbot for answering your questions about clinical evidence from public medical documents.</p>
+      </header>
 
-      <QuestionInput
-        question={question}
-        setQuestion={setQuestion}
-        loading={loading}
-        onAsk={handleAsk}
-      />
+      <section className="question-section">
+        <QuestionInput
+          question={question}
+          setQuestion={setQuestion}
+          loading={loading}
+          onAsk={handleAsk}
+        />
+        {error && <p>{error}</p>}
+      </section>
 
-      {error && <p>{error}</p>}
-
+      
+      <section className="answer-section">
       <Answer answer={answer} />
-
       <Sources sources={sources} />
+      </section>
     </>
   )
 }
