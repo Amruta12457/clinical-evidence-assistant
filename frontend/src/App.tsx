@@ -3,6 +3,7 @@ import { useState } from 'react'
 import type { Source } from "./types"
 import Sources from "./components/Sources"
 import QuestionInput from './components/QuestionInput'
+import Answer from './components/Answer'
 
 function App() {
   const [question, setQuestion] = useState('')
@@ -66,7 +67,7 @@ function App() {
 
       {error && <p>{error}</p>}
 
-      <p>{answer}</p>
+      <Answer answer={answer} />
 
       <Sources sources={sources} />
     </>

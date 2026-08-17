@@ -12,3 +12,8 @@ export type QuestionInputProps = {
   loading: boolean
   onAsk: () => void
 }
+
+// Defining AnswerProps type
+export type AnswerProps = {
+  answer: string
+}
