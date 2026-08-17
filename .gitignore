@@ -2,3 +2,4 @@
 __pycache__/
 .env
 switch_to_venv.sh
+.DS_store

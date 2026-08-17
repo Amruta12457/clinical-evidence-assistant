@@ -54,28 +54,47 @@ function App() {
   }
 
   return (
-    <>
-      <header className="app-header">
-        <h1>Clinical Evidence Assistant</h1>
-        <p>A chatbot for answering your questions about clinical evidence from public medical documents.</p>
-      </header>
+    <div className="app">
+      <div className="app-shell">
+        <header className="app-header">
+          <div className="app-header__mark" aria-hidden="true" />
+          <h1 className="app-header__title">Clinical Evidence Assistant</h1>
+          <p className="app-header__description">
+            A chatbot for answering your questions about clinical evidence from public medical documents.
+          </p>
+        </header>
 
-      <section className="question-section">
-        <QuestionInput
-          question={question}
-          setQuestion={setQuestion}
-          loading={loading}
-          onAsk={handleAsk}
-        />
-        {error && <p>{error}</p>}
-      </section>
+        <main>
+          <section className="question-section" aria-labelledby="question-heading">
+            <h2 id="question-heading" className="visually-hidden">Ask a clinical evidence question</h2>
+            <QuestionInput
+              question={question}
+              setQuestion={setQuestion}
+              loading={loading}
+              onAsk={handleAsk}
+            />
+            {loading && (
+              <div className="question-progress" aria-hidden="true">
+                <span className="question-progress__bar" />
+              </div>
+            )}
+            <p className="question-hint">
+              Answers are generated from retrieved passages in public clinical documents.
+            </p>
+            {error && (
+              <p className="error-alert" role="alert">
+                {error}
+              </p>
+            )}
+          </section>
 
-      
-      <section className="answer-section">
-      <Answer answer={answer} />
-      <Sources sources={sources} />
-      </section>
-    </>
+          <section className="results-section" aria-live="polite">
+            <Answer answer={answer} />
+            <Sources sources={sources} />
+          </section>
+        </main>
+      </div>
+    </div>
   )
 }
 

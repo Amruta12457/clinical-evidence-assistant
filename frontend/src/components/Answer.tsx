@@ -5,9 +5,10 @@ function Answer({ answer } : AnswerProps) {
         return null
     }
     return (
-        <>
-            <p>{answer}</p>
-        </>
+        <article className="answer-card">
+            <h2 className="section-heading">Answer</h2>
+            <p className="answer-text">{answer}</p>
+        </article>
     )
 }
 
