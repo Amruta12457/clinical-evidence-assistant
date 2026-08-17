@@ -17,3 +17,9 @@ export type QuestionInputProps = {
 export type AnswerProps = {
   answer: string
 }
+
+// Defining ApiResponse type
+export type ApiResponse = {
+  answer: string
+  sources: Source[]
+}
