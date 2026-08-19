@@ -12,6 +12,7 @@ class UserQuestion(BaseModel):
 
 # Defining Pydantic class for source
 class Source(BaseModel):
+    rank: int
     document: str
     page_number: int | None
     text: str
