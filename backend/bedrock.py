@@ -129,7 +129,7 @@ def parse_response(response):
     }
 
 if __name__ == "__main__":
-    question = "What was the EASI-75 response rate at week 16 in SOLO 1 and SOLO 2 for patients receiving weekly dupilumab, and how do these compare to placebo?"
+    question = "What were the enrollment numbers for SOLO 1 and SOLO 2?"
 
     result = ask_question(question)
 

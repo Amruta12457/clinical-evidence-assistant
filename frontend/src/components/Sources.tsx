@@ -10,10 +10,14 @@ function Sources({ sources }: { sources: Source[]}) {
             <h2 id="sources-heading" className="section-heading">Supporting evidence</h2>
             <p className="sources-intro">Retrieved from the indexed clinical documents.</p>
             <ol className="source-list">
-                {sources.map((source, index) => {
+                {sources.map((source) => {
                     return (
-                        <li key={index} className="source-card">
+                        <li key={source.rank} className="source-card">
                             <div className="source-card__meta">
+                                <p className="source-meta-item">
+                                    <span className="source-meta-label">Source</span>
+                                    <span className="source-meta-value">{source.rank}</span>
+                                </p>
                                 <p className="source-meta-item">
                                     <span className="source-meta-label">Document</span>
                                     <span className="source-meta-value">{source.document}</span>

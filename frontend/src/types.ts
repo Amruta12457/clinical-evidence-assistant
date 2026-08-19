@@ -1,5 +1,6 @@
 // Defining the Source type
  export type Source = {
+  rank: number
   document: string
   page_number: number | null
   text: string

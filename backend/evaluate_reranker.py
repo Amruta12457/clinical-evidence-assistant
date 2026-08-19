@@ -1,15 +1,6 @@
 from bedrock import retrieve_chunks
-from reranker import model
+from reranker import rerank
 from benchmark import benchmark
-
-
-def is_relevant(text, expected_evidence):
-    text = text.lower()
-
-    return all(
-        evidence.lower() in text
-        for evidence in expected_evidence
-    )
 
 
 for item in benchmark:
@@ -21,49 +12,29 @@ for item in benchmark:
 
     chunks = retrieve_chunks(question)
 
-    # Original Bedrock ranking
+    # Find the original Bedrock rank of the answer-bearing chunk
     original_rank = None
 
     for rank, chunk in enumerate(chunks, start=1):
-        text = chunk["content"]["text"]
 
-        if is_relevant(text, item["expected_evidence"]):
+        if all(
+            evidence.lower() in chunk["content"]["text"].lower()
+            for evidence in item["answer_evidence"]
+        ):
             original_rank = rank
             break
 
     # CrossEncoder reranking
-    pairs = [
-        (question, chunk["content"]["text"])
-        for chunk in chunks
-    ]
+    reranked = rerank(question, chunks)
 
-    scores = model.predict(pairs)
-
-    reranked = []
-
-    for original_rank_number, (chunk, score) in enumerate(
-        zip(chunks, scores),
-        start=1
-    ):
-        reranked.append({
-            "original_rank": original_rank_number,
-            "score": float(score),
-            "text": chunk["content"]["text"]
-        })
-
-    reranked.sort(
-        key=lambda x: x["score"],
-        reverse=True
-    )
-
-    # Find relevant chunk after reranking
+    # Find the CrossEncoder rank of the answer-bearing chunk
     rerank_rank = None
 
     for rank, result in enumerate(reranked, start=1):
 
-        if is_relevant(
-            result["text"],
-            item["expected_evidence"]
+        if all(
+            evidence.lower() in result["chunk"]["content"]["text"].lower()
+            for evidence in item["answer_evidence"]
         ):
             rerank_rank = rank
             break
