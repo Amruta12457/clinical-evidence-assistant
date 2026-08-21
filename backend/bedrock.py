@@ -27,7 +27,7 @@ def ask_question(question):
     top_chunks = get_top_chunks(
         question,
         chunks,
-        k=5
+        k=10
     )
 
     context = "\n\n".join(
